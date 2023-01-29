@@ -29,7 +29,6 @@ function CancelPainting(){
 }
 
 function onLineWidthChange(event) {
-    console.log(event);
     ctx.lineWidth=event.target.value
 }
 
