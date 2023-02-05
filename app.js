@@ -1,3 +1,6 @@
+const modeBtn = document.getElementById("mode-btn");
+const destroyBtn = document.getElementById("destroy-btn");
+const eraserBtn = document.getElementById("eraser-btn");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-options")
 );
@@ -6,10 +9,13 @@ const lineWidth = document.getElementById("line-width")
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const color = document.getElementById("color");
-canvas.width = 800;
-canvas.height = 800;
+const canvas_width = 800;
+const canvas_height = 800;
+canvas.width = canvas_width;
+canvas.height = canvas_height;
 ctx.lineWidth = lineWidth.value;
 let isPainting = false;
+let isFilling = false;
 
 
 function onMove(event){
@@ -51,12 +57,44 @@ function onColorClick(event){
   color.value = colorValue;
 }
 
-canvas.addEventListener("mousemove", onMove)
-canvas.addEventListener("mousedown", startPainting)
-canvas.addEventListener("mouseup", CancelPainting)
-canvas.addEventListener("mouseleave", CancelPainting)
+function onModeClick () {
+  if (isFilling) {
+    isFilling = false;
+    modeBtn.innerText = "Fill";
+  } else {
+    isFilling = true;
+    modeBtn.innerText = "Draw"
+  }
+}
+
+function onCanvasClick() {
+  if (isFilling) {
+    ctx.fillRect (0, 0, canvas_width, canvas_height);
+  }
+}
+
+function onDestroyClick() {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas_width, canvas_height);
+}
+
+function onEraserClick() {
+  ctx.strokeStyle = "white";
+  isFilling = false;
+  modeBtn.innerText = "Fill"
+}
+
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", startPainting);
+canvas.addEventListener("mouseup", CancelPainting);
+canvas.addEventListener("mouseleave", CancelPainting);
+canvas.addEventListener("click", onCanvasClick);
 color.addEventListener("change", onColorChange);
-lineWidth.addEventListener("change", onLineWidthChange)
+lineWidth.addEventListener("change", onLineWidthChange);
+
 
 colorOptions.forEach((color) => color.addEventListener ("click", onColorClick));
+modeBtn.addEventListener("click", onModeClick);
 
+destroyBtn.addEventListener("click", onDestroyClick)
+eraserBtn.addEventListener("click", onEraserClick)

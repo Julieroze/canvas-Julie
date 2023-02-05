@@ -10,6 +10,7 @@
 <body>
     <canvas></canvas>
     <input type="range" id="line-width" min="1" max="10" value="5" step="0.1">
+    <div>
     <input type="color" id="color" />
     <div
     class="color-options"
@@ -24,7 +25,7 @@ data-color="#757281"
     <div
     class="color-options"
     style="background-color: #1338BE"
-data-color="1338BE"
+data-color="#1338BE"
 ></div>
     <div
     class="color-options"
@@ -34,7 +35,7 @@ data-color="#2C3E4C"
     <div
     class="color-options"
     style="background-color: #0492C2"
-data-color="0492C2"
+data-color="#0492C2"
 ></div>
     <div
     class="color-options"
@@ -61,6 +62,11 @@ data-color="#0A1172"
     style="background-color: #241571"
 data-color="#241571"
 ></div>
+</div>
+<button id="mode-btn">Fill</button>
+<button id="destroy-btn">Destroy</button>
+<button id="eraser-btn">Erase</button>
+
 
     <script src="app.js"></script>
     
